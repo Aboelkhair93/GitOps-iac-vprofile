@@ -1,25 +1,25 @@
-name: "Vprofile IAC"
+name: "Vprofile iac"
 on:
     push:
         branches:
-          - main
-          - stage
+            - main
+            - stage
         paths:
-          - terraform/**
+            - terraform/**
     pull_request:
         branches:
-         - main
+            - main
         paths:
-         - terraform/**
-         
+            - terraform/**    
+
 env:
-#Credentials for deployment to AWS
-AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}                
+    #Credentials for deployment to AWS
+AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}                
 # S3 bucket for the terraform state
-BUCKET_TF_STATE: ${{secret.BUCKET_TF_STATE}}
+BUCKET_TF_STATE: ${{ secret.BUCKET_TF_STATE }}
 AWS_REGION: us-east-1
-# EKS_CLUSTER: vprofile-eks
+EKS_CLUSTER: vprofile-eks
 
 jobs:
     terraform:
@@ -56,6 +56,8 @@ jobs:
             - name: Terrafporm plan status
               if: steps.plan.outcome == 'failure'
               run: exit 1
+
+
 
 
 
